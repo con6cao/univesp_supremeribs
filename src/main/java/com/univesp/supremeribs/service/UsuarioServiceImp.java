@@ -31,7 +31,7 @@ public class UsuarioServiceImp implements UsuarioService {
         return usuarioRepository.findById(id).orElseThrow();
     }
 
-    public void deletar(Long id)
+    public void deletar(Long id){
         usuarioRepository.deleteById(id);
     }
 }
