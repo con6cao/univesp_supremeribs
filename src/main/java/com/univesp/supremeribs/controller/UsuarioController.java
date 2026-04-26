@@ -1,42 +1,46 @@
 package com.univesp.supremeribs.controller;
 
 import com.univesp.supremeribs.model.Usuario;
-import com.univesp.supremeribs.repository.UsuarioRepository;
+import com.univesp.supremeribs.dto.Response;
+import com.univesp.supremeribs.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
 public class UsuarioController {
     @Autowired
-    private UsuarioRepository repository;
+    private UsuarioService usuarioService;
+
 
     @PostMapping("/usuarios")
-    public void postUsuario(@RequestBody Usuario usuario) {
-        repository.save(usuario);
-    }
-/*
-    @PutMapping("/usuarios")
-    public void put(@RequestBody Usuario usuario) {
-        repository.update(usuario);
-    }*/
-
-    @GetMapping("/usuarios")
-    public List<Usuario> getAllUsuarios() {
-        return repository.findAll();
+    public ResponseEntity postUsuario(@RequestBody @Valid Usuario usuario) {
+        usuarioService.inserir(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
 
     @GetMapping("/usuario/{id}")
-    public Optional<Usuario> getOneUsuarios(@PathVariable("id") Long id) {
-        return repository.findById(id);
+    public ResponseEntity<Usuario> buscarId(@PathVariable Long id) {
+        Usuario usuario = usuarioService.buscarId(id);
+        return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
 
-/*@DeleteMapping("/usuarios/{id}")
-    public void delete(@PathVariable("id") Integer id) {
-        repository.remove(id);
-    }*/
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<Usuario>> buscar() {
+        List<Usuario> usuario = usuarioService.buscar();
+        return ResponseEntity.status(HttpStatus.OK).body(usuario);
+    }
+
+    @DeleteMapping(path = "/deletar/{id}")
+    public ResponseEntity<Usuario> deletar(@PathVariable Long id) {
+        usuarioService.deletar(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+
 }

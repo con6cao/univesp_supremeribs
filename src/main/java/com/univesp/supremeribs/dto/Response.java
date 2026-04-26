@@ -1,2 +1,8 @@
-package com.univesp.supremeribs.dto;public interface Response {
+package com.univesp.supremeribs.dto;
+
+public enum Response {
+
+    RESPONSE,
+    STATUSCODE
+
 }
