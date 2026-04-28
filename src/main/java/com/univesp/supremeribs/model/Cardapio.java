@@ -1,4 +1,2 @@
-package com.univesp.supremeribs.model;
-
-public class Cardapio {
+package com.univesp.supremeribs.model;public class Cardapio {
 }
