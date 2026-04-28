@@ -4,42 +4,40 @@ package com.univesp.supremeribs.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Cardapio {
+public class BaseFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
-    @Lob
+    private Long idFile;
+    private String nameFile;
+    @Lob // Define como BLOB
     @Column(name = "foto", columnDefinition="BLOB")
-    public byte[] foto;
+    private byte[] foto;
 
 
-    public Cardapio() {
+    public BaseFile() {
     }
 
-    public Cardapio(Long id, String nome, String descricao, String preco, byte[] imagem) {
-        this.id = id;
-        this.nome = nome;
-        this.foto = imagem;
+    public BaseFile(Long id, String nameFile, byte[] foto) {
+        this.idFile = idFile;
+        this.nameFile = nameFile;
+        this.foto = foto;
     }
 
     public Long getId() {
-        return id;
+        return idFile;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdFile(Long idFile) {
+        this.idFile = idFile;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNameFile() {
+        return nameFile;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNameFile(String nameFilee) {
+        this.nameFile = nameFile;
     }
-
-
 
     public byte[] getFoto() {
         return foto;

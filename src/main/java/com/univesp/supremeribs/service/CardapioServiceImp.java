@@ -1,37 +1,39 @@
 package com.univesp.supremeribs.service;
 
-import com.univesp.supremeribs.model.Usuario;
-import com.univesp.supremeribs.repository.UsuarioRepository;
+import com.univesp.supremeribs.model.Cardapio;
+import com.univesp.supremeribs.repository.CardapioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UsuarioServiceImp implements UsuarioService {
+public class CardapioServiceImp implements CardapioService {
 
-    private UsuarioRepository usuarioRepository;
 
-    public UsuarioServiceImp(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    private CardapioRepository cardapioRepository;
+
+    public CardapioServiceImp(CardapioRepository cardapioRepository) {
+        this.cardapioRepository = cardapioRepository;
     }
 
     @Override
-    public Usuario inserir(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public Cardapio inserir(Cardapio cardapio) {
+       return cardapioRepository.save(cardapio);
     }
 
     @Override
-    public List<Usuario> buscar() {
-        return usuarioRepository.findAll();
-
+    public Optional<Cardapio> buscarId(Long id) {
+        return cardapioRepository.findById(id);
     }
 
     @Override
-    public Usuario buscarId(Long id) {
-        return usuarioRepository.findById(id).orElseThrow();
+    public List<Cardapio> buscarVarios() {
+        return cardapioRepository.findAll();
     }
 
-    public void deletar(Long id){
-        usuarioRepository.deleteById(id);
+    @Override
+    public void deletar(Long id) {
+        cardapioRepository.deleteById(id);
     }
 }

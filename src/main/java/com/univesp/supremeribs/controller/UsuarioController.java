@@ -1,7 +1,6 @@
 package com.univesp.supremeribs.controller;
 
 import com.univesp.supremeribs.model.Usuario;
-import com.univesp.supremeribs.dto.Response;
 import com.univesp.supremeribs.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
 
-    @PostMapping("/usuarios")
+    @PostMapping("/usuario")
     public ResponseEntity postUsuario(@RequestBody @Valid Usuario usuario) {
         usuarioService.inserir(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);

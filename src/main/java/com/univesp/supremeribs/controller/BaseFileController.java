@@ -1,7 +1,7 @@
 package com.univesp.supremeribs.controller;
 
 import com.univesp.supremeribs.model.BaseFile;
-import com.univesp.supremeribs.repository.CardapioRepository;
+import com.univesp.supremeribs.repository.BaseFileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,20 +15,20 @@ import java.io.IOException;
 public class BaseFileController {
 
     @Autowired
-    private CardapioRepository cardapiorepository;
+    private BaseFileRepository baseFileRepository;
 
     @PostMapping("/fotoCardapio")
     public String uploadImagem(@RequestParam("file") MultipartFile file) throws IOException {
         BaseFile baseFile = new BaseFile();
-        baseFile.setNome(file.getOriginalFilename());
+        baseFile.setNameFile(file.getOriginalFilename());
         baseFile.setFoto(file.getBytes()); // Converte para byte[]
-        cardapiorepository.save(baseFile);
+        baseFileRepository.save(baseFile);
         return "Imagem salva com sucesso! ID: " + baseFile.getId();
     }
 
     @GetMapping("/fotoCardapio/{id}")
     public ResponseEntity<byte[]> getImagem(@PathVariable Long id) {
-        BaseFile baseFile = cardapiorepository.findById(id).orElseThrow();
+        BaseFile baseFile = baseFileRepository.findById(id).orElseThrow();
 
         // Retorna a imagem com o content type apropriado
         return ResponseEntity.ok()
