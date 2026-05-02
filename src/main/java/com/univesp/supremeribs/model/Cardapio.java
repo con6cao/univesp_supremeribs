@@ -12,17 +12,22 @@ public class Cardapio {
     private String nomeIten;
     private Float preco;
     private String descricao;
+    private String nameFile;
+    @Lob // Define como BLOB
+    @Column(name = "foto", columnDefinition="BLOB")
+    private byte[] foto;
 
 
     public Cardapio() {
     }
 
-    public Cardapio(Long id, String nomeIten, Float preco, String descricao) {
+    public Cardapio(Long id, String nomeIten, Float preco, String descricao, Long idFile, String nameFile, byte[] foto) {
         this.id = id;
         this.nomeIten = nomeIten;
         this.preco = preco;
         this.descricao = descricao;
-
+        this.nameFile = nameFile;
+        this.foto = foto;
     }
 
     public Long getId() {
@@ -55,5 +60,23 @@ public class Cardapio {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+
+
+    public String getNameFile() {
+        return nameFile;
+    }
+
+    public void setNameFile(String nameFile) {
+        this.nameFile = nameFile;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }
