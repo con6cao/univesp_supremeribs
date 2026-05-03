@@ -1,6 +1,6 @@
 # Use the Eclipse alpine official image
 # https://hub.docker.com/_/eclipse-temurin
-FROM corretto-16
+FROM eclipse-temurin:25
 
 # Create and change to the app directory.
 WORKDIR /app
